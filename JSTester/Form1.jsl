@@ -1,0 +1,147 @@
+package JSTester;
+
+import System.Drawing.*;
+import System.Collections.*;
+import System.ComponentModel.*;
+import System.Windows.Forms.*;
+import System.Data.*;
+
+import CSLibs.*;
+import java.awt.event.*;
+import java.awt.*;
+
+/**
+ * Summary description for Form1.
+ */
+public class Form1 extends System.Windows.Forms.Form
+{
+	private System.Windows.Forms.Button btnJavaTes;
+	private System.Windows.Forms.Button btnTes;
+	/**
+	 * Required designer variable.
+	 */
+	private System.ComponentModel.Container components = null;
+
+	public Form1()
+	{
+		//
+		// Required for Windows Form Designer support
+		//
+		InitializeComponent();
+
+		//
+		// TODO: Add any constructor code after InitializeComponent call
+		//
+	}
+
+	/**
+	 * Clean up any resources being used.
+	 */
+	protected void Dispose(boolean disposing)
+	{
+		if (disposing)
+		{
+			if (components != null)
+			{
+				components.Dispose();
+			}
+		}
+		super.Dispose(disposing);
+	}
+
+	#region Windows Form Designer generated code
+	/**
+	 * Required method for Designer support - do not modify
+	 * the contents of this method with the code editor.
+	 */
+	private void InitializeComponent()
+	{
+		this.btnJavaTes = new System.Windows.Forms.Button();
+		this.btnTes = new System.Windows.Forms.Button();
+		this.SuspendLayout();
+		// 
+		// btnJavaTes
+		// 
+		this.btnJavaTes.set_Location(new System.Drawing.Point(24, 16));
+		this.btnJavaTes.set_Name("btnJavaTes");
+		this.btnJavaTes.set_TabIndex(0);
+		this.btnJavaTes.set_Text("&Java Tes");
+		this.btnJavaTes.add_Click( new System.EventHandler(this.btnJavaTes_Click) );
+		// 
+		// btnTes
+		// 
+		this.btnTes.set_Location(new System.Drawing.Point(80, 80));
+		this.btnTes.set_Name("btnTes");
+		this.btnTes.set_TabIndex(1);
+		this.btnTes.set_Text("&Tes");
+		this.btnTes.add_Click( new System.EventHandler(this.btnTes_Click) );
+		// 
+		// Form1
+		// 
+		this.set_AutoScaleBaseSize(new System.Drawing.Size(5, 13));
+		this.set_ClientSize(new System.Drawing.Size(200, 141));
+		this.get_Controls().Add(this.btnTes);
+		this.get_Controls().Add(this.btnJavaTes);
+		this.set_Name("Form1");
+		this.set_Text("Form1");
+		this.ResumeLayout(false);
+
+	}
+	#endregion
+
+	/**
+	 * The main entry point for the application.
+	 */
+	/** @attribute System.STAThread() */
+	public static void main(String[] args) 
+	{
+		Application.Run(new Form1());
+	}
+
+	private void btnJavaTes_Click (Object sender, System.EventArgs e)
+	{
+		Frame f = new Frame("tes");
+		java.awt.Button btn;
+		f.add(btn = new java.awt.Button("button!!"));
+		btn.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ev)
+			{
+				// .NET
+				MessageBox.Show("Tes!");
+			}
+		});
+		f.addWindowListener(new WindowAdapter() 
+		{
+			public void windowClosing(WindowEvent ev) 
+			{
+				System.exit(0);
+			}
+		});
+
+		f.pack();
+		f.show();
+	}
+
+	private void btnTes_Click (Object sender, System.EventArgs e)
+	{
+		Cs lib = new Cs();
+		int result = lib.Add(5,3);
+		MessageBox.Show(result + "");
+
+		JsLib js = new JsLib();
+		MessageBox.Show( js.get_Name() );
+	}
+
+	class JsLib extends CSLibs.Cs
+	{
+		public JsLib()
+		{
+			super("J#");
+		}
+		public JsLib(String name)
+		{
+			super(name);
+		}
+	}
+}
